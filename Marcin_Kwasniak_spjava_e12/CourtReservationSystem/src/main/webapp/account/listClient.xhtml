@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{msg['main.welcome.clients.list']}</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Court Reservation System" brandHref="#" inverse="false">
+            <b:navbarLinks pull="right">
+                <b:navLink value="#{msg['main.authenticate']} #{contextUtils.userName}" href="#" iconAwesome="group" iconAlign="left" />
+            </b:navbarLinks>
+        </b:navBar>
+        <h:form id="listakont">
+            <b:container>
+                <b:dataTable border="1" var="row" value="#{listClientPageBean.listClientDTO}">
+                    <h:column id="imie">
+                        <f:facet name="header">${msg['account.registerClient.firstName']}</f:facet>
+                        <h:outputText value="#{row.firstName}" />
+                    </h:column>
+                    <h:column id="nazwisko">
+                        <f:facet name="header">${msg['account.registerClient.lastName']}</f:facet>
+                        <h:outputText value="#{row.lastName}" />
+                    </h:column>
+                    <h:column id="email">
+                        <f:facet name="header">${msg['account.registerClient.email']}</f:facet>
+                        <h:outputText value="#{row.email}" />
+                    </h:column>
+                    <h:column id="telefon">
+                        <f:facet name="header">${msg['account.registerClient.phoneNumber']}</f:facet>
+                        <h:outputText value="#{row.phoneNumber}" />
+                    </h:column>
+                    <h:column id="Active">
+                        <f:facet name="header">Active</f:facet>
+                        <h:selectBooleanCheckbox id="confirmed" value="#{row.active}" disabled="true" /> 
+                    </h:column>
+                    <h:column id="Confirm">
+                        <f:facet name="header">Confirm</f:facet>
+                        <h:selectBooleanCheckbox id="active" value="#{row.confirm}" disabled="true"/> 
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">${msg['general.actions']}</f:facet>
+                        <h:commandButton action="#{listClientPageBean.activateClientAction(row)}" value="${msg['action.activate']}" rendered="#{not row.active}" disabled="#{request.isUserInRole('Klient')}" />
+                        <h:commandButton action="#{listClientPageBean.deactivateClientAction(row)}" value="${msg['action.deactivate']}" rendered="#{row.active}" disabled="#{request.isUserInRole('Klient')}" />
+                        <h:commandButton action="#{listClientPageBean.confirmClientAction(row)}" value="${msg['action.confirmAccount']}" rendered="#{not row.confirm}" disabled="#{request.isUserInRole('Pracownik')}" />
+                    </h:column>
+
+                    <h:column id="action">
+                        <f:facet name="header">${msg['general.actions']}</f:facet>
+                        <h:commandButton value="${msg['action.delete']}" action="#{listClientPageBean.deleteClientAction(row)}" />
+                        <h:commandButton value="${msg['action.edit']}" action="#{listClientPageBean.editClientAction(row)}" />
+                    </h:column>
+                </b:dataTable>
+                <h:commandLink value="${msg['action.backToMain']}" action="/main/welcome.xhtml" />
+            </b:container>
+        </h:form>
+    </h:body>
+</html>
+

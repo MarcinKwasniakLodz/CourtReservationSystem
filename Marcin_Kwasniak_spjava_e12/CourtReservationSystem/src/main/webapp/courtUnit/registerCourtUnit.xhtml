@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>#{msg['menu.register']}</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Court Reservation System" brandHref="#" inverse="false">
+            <b:navbarLinks pull="right">
+                <b:navLink value="#{msg['main.authenticate']} #{contextUtils.userName}" href="#" iconAwesome="group" iconAlign="left" />
+            </b:navbarLinks>
+        </b:navBar>
+        <b:container>
+            <h:form id="createClient">
+                <h:panelGrid columns="2">
+                    <b:row><b:column>${msg['courtUnit.registerCourtUnit.courtNumber']} </b:column><b:column><b:inputText placeholder="${msg['courtUnit.registerCourtUnit.courtNumber']}" id="courtNumber" value="#{registerCourtUnitPageBean.savedCourtUnitDTO.courtNumber}" required="true"></b:inputText></b:column></b:row>
+                    <b:row><b:message for="courtNumber"/></b:row>
+                    <b:row><b:column>${msg['courtUnit.registerCourtUnit.courtName']} </b:column><b:column><b:inputText placeholder="${msg['courtUnit.registerCourtUnit.courtName']}" id="courtName" value="#{registerCourtUnitPageBean.savedCourtUnitDTO.courtName}" /></b:column></b:row>
+                    <b:row><b:message for="courtName"></b:message></b:row>
+                    <b:row><b:column>${msg['courtUnit.registerCourtUnit.typeOfCourt']} </b:column><b:column><b:inputText placeholder="${msg['courtUnit.registerCourtUnit.typeOfCourt']}" id="typeOfCourt" value="#{registerCourtUnitPageBean.savedCourtUnitDTO.typeOfCourt}" /></b:column></b:row>
+                    <b:row><b:message for="typeOfCourt"></b:message></b:row>
+                    <b:row><b:column>${msg['courtUnit.registerCourtUnit.typeOfSurface']} </b:column><b:column><b:inputText placeholder="${msg['courtUnit.registerCourtUnit.typeOfSurface']}" id="typeOfSurface" value="#{registerCourtUnitPageBean.savedCourtUnitDTO.typeOfSurface}" ></b:inputText></b:column></b:row>
+                    <b:row><b:message for="typeOfSurface"/></b:row>
+                                   
+                    <b:commandButton look="success" size="lg" value="${msg['account.registerClient.button.confirm']}" action="#{registerCourtUnitPageBean.saveRegisterCourtUnit()}" /> <!--wykonanie akcji z komponentu CDI (PageBean) po naciśnięciu zapis-->
+                    <b:row></b:row>
+                    <b:commandButton look="warning" value="${msg['account.registerClient.button.cancel']}" action="cancelAction" immediate="true" /> <!--przycisk powrotu na stronę główną-->
+                </h:panelGrid>
+            </h:form>
+        </b:container>
+    </h:body>
+</html>
+

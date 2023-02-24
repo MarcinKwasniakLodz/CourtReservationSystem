@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Strona główna</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Court Reservation System" brandHref="#" inverse="false">
+            <b:navbarLinks pull="right">
+                <b:navLink value="#{msg['main.authenticate']} #{contextUtils.userName}" href="#" iconAwesome="group" iconAlign="left" />
+            </b:navbarLinks>
+        </b:navBar>
+        <h:form>
+            <p>${msg["main.page"]}</p>
+            <h:commandLink value="${msg['main.welcome.register']}" action="/login/customFormLogin.xhtml" rendered="#{empty request.remoteUser}" />
+            <br />
+            <h:commandLink value="${msg['main.welcome.log.off']}" action="#{contextUtils.invalidateSession()}" rendered="#{not empty request.remoteUser}" />
+            <br />
+            <h:commandLink rendered="#{request.isUserInRole('Klient')}" value="${msg['main.welcome.reservation.list']}" action="/reservation/listReservation.xhtml?faces-redirect=true" />
+            <br />
+            <h:commandLink rendered="#{request.isUserInRole('Pracownik')}" value="${msg['main.welcome.reservation.list']}" action="/reservation/listReservation.xhtml?faces-redirect=true" />
+            <br />
+            <h:commandLink rendered="#{request.isUserInRole('Administrator')}" value="${msg['main.welcome.clients.list']}" action="/account/listClient.xhtml?faces-redirect=true" />
+            <br />
+            <h:commandLink rendered="#{request.isUserInRole('Pracownik')}" value="${msg['main.welcome.clients.list']}" action="/account/listClient.xhtml?faces-redirect=true" />
+            <br />
+            <h:commandLink rendered="#{request.isUserInRole('Klient')}" value="${msg['main.welcome.reservations.new']}" action="/reservation/registerReservation.xhtml?faces-redirect=true"  />
+            <br />
+            <h:commandLink rendered="#{request.isUserInRole('Pracownik')}" value="${msg['main.welcome.courts.list']}" action="/courtUnit/listCourtUnit.xhtml?faces-redirect=true" />
+            <br />
+            <h:commandLink value="${msg['main.welcome.create.client']}" action="/account/registerClient.xhtml" rendered="#{empty request.remoteUser}" />
+            <br />
+            <h:commandLink rendered="#{request.isUserInRole('Pracownik')}" value="${msg['main.welcome.create.courtUnit']}" action="/courtUnit/registerCourtUnit.xhtml?faces-redirect=true" />
+            <br />
+        </h:form>
+    </h:body>
+</html>
+

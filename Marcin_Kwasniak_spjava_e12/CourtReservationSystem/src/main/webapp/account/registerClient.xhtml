@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>#{msg['menu.register']}</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Court Reservation System" brandHref="#" inverse="false">
+            <b:navbarLinks pull="right">
+                <b:navLink value="#{msg['main.authenticate']} #{contextUtils.userName}" href="#" iconAwesome="group" iconAlign="left" />
+            </b:navbarLinks>
+        </b:navBar>
+        <b:container>
+            <h:form id="createClient">
+                <h:panelGrid columns="2">
+                    <b:row><b:column>${msg['account.registerClient.login']} </b:column>
+                        <b:column><b:inputText value="#{createClientPageBean.createClientDTO.login}" required="true" placeholder="${msg['account.registerClient.login']}" id="login" ><f:validateLength minimum="3" maximum="32" /></b:inputText></b:column></b:row>
+                    <b:row><b:message for="login"/></b:row>
+                    <b:row><b:column>${msg['account.registerClient.password']} </b:column>
+                        <b:column><b:inputSecret value="#{createClientPageBean.createClientDTO.password}" required="true" placeholder="${msg['account.registerClient.password']}" id="haslo"  /></b:column></b:row>
+                    <b:row><b:message for="haslo"></b:message></b:row>
+                    <b:row><b:column>${msg['account.registerClient.repeatPassword']} </b:column>
+                        <b:column><b:inputSecret value="#{createClientPageBean.hasloPowtorz}" required="true" placeholder="${msg['account.registerClient.repeatPassword']}" id="powtorzHaslo" /></b:column></b:row>
+                    <b:row><b:message for="powtorzHaslo"></b:message></b:row>
+                    <b:row><b:column>${msg['account.registerClient.firstName']} </b:column>
+                        <b:column><b:inputText value="#{createClientPageBean.createClientDTO.firstName}" required="true" placeholder="${msg['account.registerClient.firstName']}" id="imie" ></b:inputText></b:column></b:row>
+                    <b:row><b:message for="imie"/></b:row>
+                    <b:row><b:column>${msg['account.registerClient.lastName']} </b:column>
+                        <b:column><b:inputText value="#{createClientPageBean.createClientDTO.lastName}" required="true" placeholder="${msg['account.registerClient.lastName']}" id="nazwisko" ></b:inputText></b:column></b:row>
+                    <b:row><b:message for="nazwisko"/></b:row>
+                    <b:row><b:column>${msg['account.registerClient.email']} </b:column>
+                        <b:column><b:inputText value="#{createClientPageBean.createClientDTO.email}" required="true" placeholder="${msg['account.registerClient.email']}" id="email" ></b:inputText></b:column></b:row>
+                    <b:row><b:message for="email"/></b:row>
+                    <b:row><b:column>${msg['account.registerClient.phoneNumber']} </b:column>
+                        <b:column><b:inputText value="#{createClientPageBean.createClientDTO.phoneNumber}" required="true" placeholder="${msg['account.registerClient.phoneNumber']}" id="telefon" ></b:inputText></b:column></b:row>
+                    <b:row><b:message for="telefon"/></b:row>
+                    <b:row><b:column>${msg['account.registerClient.kind']} </b:column>
+                        <b:column><b:inputText value="#{createClientPageBean.createClientDTO.kind}" required="true" placeholder="${msg['account.registerClient.kind']}" id="kind" ></b:inputText></b:column></b:row>
+                    <b:row><b:message for="kind"/></b:row>
+
+                    <b:commandButton look="success" size="lg" value="${msg['account.registerClient.button.confirm']}" action="#{createClientPageBean.actionApproveRegisterClient()}" /> <!--wykonanie akcji z komponentu CDI po naciśnięciu zapis-->
+                    <b:row></b:row>
+                    <b:commandButton look="warning" value="${msg['account.registerClient.button.cancel']}" action="cancelAction" immediate="true" /> <!--przycisk powrotu na stronę główną-->
+                </h:panelGrid>
+            </h:form>
+        </b:container>
+    </h:body>
+</html>
+

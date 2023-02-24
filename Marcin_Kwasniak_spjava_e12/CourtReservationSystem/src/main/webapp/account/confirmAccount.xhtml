@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Potwierdź konto</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Court Reservation System" brandHref="#" inverse="false">
+            <b:navbarLinks pull="right">
+                <b:navLink value="#{msg['main.authenticate']} #{contextUtils.userName}" href="#" iconAwesome="group" iconAlign="left" />
+            </b:navbarLinks>
+        </b:navBar>
+        <h:form id="potwierdzkonto">
+            ${msg['account.registerClient.login']} <h:outputText id="login" value="#{createClientPageBean.createClientDTO.login}"/><br />
+            ${msg['account.registerClient.firstName']} <h:outputText id="imie" value="#{createClientPageBean.createClientDTO.firstName}"/><br />
+            ${msg['account.registerClient.lastName']} <h:outputText id="nazwisko" value="#{createClientPageBean.createClientDTO.lastName}"/><br />
+            ${msg['account.registerClient.email']} <h:outputText id="email" value="#{createClientPageBean.createClientDTO.email}"/><br />
+            ${msg['account.registerClient.phoneNumber']} <h:outputText id="telefon" value="#{createClientPageBean.createClientDTO.phoneNumber}"/><br />
+            ${msg['account.registerClient.kind']} <h:outputText id="kind" value="#{createClientPageBean.createClientDTO.kind}"/><br />
+
+            <b:commandButton value="${msg['account.registerClient.button.confirm']}" action="#{createClientPageBean.actionConfirmRegisterClient}" look="success" size="lg" /> <!--wykonanie akcji z komponentu CDI po naciśnięciu zapis-->
+            <b:commandButton value="${msg['account.registerClient.button.cancel']}" action="registerClient" look="warning" immediate="true" />
+        </h:form>
+    </h:body>
+</html>
+

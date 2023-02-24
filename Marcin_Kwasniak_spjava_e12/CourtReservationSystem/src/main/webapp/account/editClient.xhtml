@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Edycja danych klienta</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Court Reservation System" brandHref="#" inverse="false">
+            <b:navbarLinks pull="right">
+                <b:navLink value="#{msg['main.authenticate']} #{contextUtils.userName}" href="#" iconAwesome="group" iconAlign="left" />
+            </b:navbarLinks>
+        </b:navBar>
+        <h:form>
+            <h:panelGrid columns="2">
+
+                <h:outputLabel value="${msg['account.editClient.firstName']}"/>
+                <h:inputText required="false" value="#{editClientPageBean.clientDTO.firstName}">
+                </h:inputText>
+                <h:outputLabel value="${msg['account.editClient.lastName']}"/>
+                <h:inputText required="false" value="#{editClientPageBean.clientDTO.lastName}">
+                </h:inputText>
+                <h:outputLabel value="${msg['account.editClient.email']}"/>
+                <h:inputText required="false" value="#{editClientPageBean.clientDTO.email}">
+                </h:inputText>
+                <h:outputLabel value="${msg['account.editClient.phoneNumber']}"/>
+                <h:inputText required="false" value="#{editClientPageBean.clientDTO.phoneNumber}">
+                </h:inputText>
+
+                <b:commandButton look="success" size="lg" value="${msg['account.registerClient.button.confirm']}" action="#{editClientPageBean.saveClientAction()}"/> <!--wykonanie akcji z komponentu CDI po naciśnięciu zapis-->
+                <b:commandButton look="warning" value="${msg['account.registerClient.button.cancel']}" action="cancelAction" immediate="true" /> <!--przycisk powrotu na stronę główną-->
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

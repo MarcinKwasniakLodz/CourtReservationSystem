@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{msg['main.welcome.courts.list']}</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Court Reservation System" brandHref="#" inverse="false">
+            <b:navbarLinks pull="right">
+                <b:navLink value="#{msg['main.authenticate']} #{contextUtils.userName}" href="#" iconAwesome="group" iconAlign="left" />
+            </b:navbarLinks>
+        </b:navBar>
+        <h:form id="listakortow">
+            <b:container>
+                <b:dataTable border="1" var="row" value="#{listCourtUnitPageBean.getListCourtUnitDTO()}">
+                    <h:column id="courtnumber">
+                        <f:facet name="header">${msg['courtUnit.registerCourtUnit.courtNumber']}</f:facet>
+                        <h:outputText value="#{row.courtNumber}" />
+                    </h:column>
+                    <h:column id="courtname">
+                        <f:facet name="header">${msg['courtUnit.registerCourtUnit.courtName']}</f:facet>
+                        <h:outputText value="#{row.courtName}" />
+                    </h:column>
+                    <h:column id="typeOfCourt">
+                        <f:facet name="header">${msg['courtUnit.registerCourtUnit.typeOfCourt']}</f:facet>
+                        <h:outputText value="#{row.typeOfCourt}" />
+                    </h:column>
+                    <h:column id="typeOfSurface">
+                        <f:facet name="header">${msg['courtUnit.registerCourtUnit.typeOfSurface']}</f:facet>
+                        <h:outputText value="#{row.typeOfSurface}" />
+                    </h:column>
+                    <h:column id="available">
+                        <f:facet name="header">${msg['courtUnit.registerCourtUnit.available']}</f:facet>
+                        <h:selectBooleanCheckbox id="confirmed" value="#{row.available}" disabled="true" /> 
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">${msg['general.actions']}</f:facet>
+                        <h:commandButton action="#{listCourtUnitPageBean.activateCourtUnitAction(row)}" value="${msg['action.activate']}" rendered="#{not row.available}" />
+                        <h:commandButton action="#{listCourtUnitPageBean.deactivateCourtUnitAction(row)}" value="${msg['action.deactivate']}" rendered="#{row.available}" />
+                    </h:column>
+                    <h:column id="action">
+                        <f:facet name="header">${msg['general.actions']}</f:facet>
+                        <h:commandButton value="${msg['action.delete']}" action="#{listCourtUnitPageBean.deleteCourtUnitAction(row)}" />
+                    </h:column>
+                </b:dataTable>
+                <h:commandLink value="${msg['action.backToMain']}" action="/main/welcome.xhtml" />
+            </b:container>
+        </h:form>
+    </h:body>
+</html>
+

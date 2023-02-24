@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Rejestracja rezerwacji</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Court Reservation System" brandHref="#" inverse="false">
+            <b:navbarLinks pull="right">
+                <b:navLink value="#{msg['main.authenticate']} #{contextUtils.userName}" href="#" iconAwesome="group" iconAlign="left" />
+            </b:navbarLinks>
+        </b:navBar>
+        <b:container>
+            <h:form id="utworzRezerwacje">
+                <b:row><b:column>${msg['reservation.createReservation.ChooseACourt']}</b:column><b:column>
+                        <h:selectOneMenu value="#{registerReservationPageBean.choosenCourtUnitDTO.courtName}"> <!--przekierowanie wyboru kortu do pola choosenCo.. w backend-->
+                            <f:selectItems value="#{registerReservationPageBean.listCourtUnitDTO}" var="court" itemLabel="#{court.courtName}" itemValue="#{court.courtName}"/> <!--wyświetlenie listy kortów-->
+                        </h:selectOneMenu></b:column></b:row>
+
+                <b:row><b:column>${msg['reservation.createReservation.BeginningOfTheReservation']}</b:column><b:column><b:dateTimePicker id="poczatekRezerwacji" side-by-side="true" iconPosition="left" value="#{registerReservationPageBean.savedReservationDTO.startDate}"/></b:column></b:row>
+                <b:row><b:column>${msg['reservation.createReservation.EndOfTheReservation']}</b:column><b:column><b:dateTimePicker id="koniecRezerwacji" side-by-side="true" iconPosition="left" value="#{registerReservationPageBean.savedReservationDTO.endDate}"/></b:column></b:row>
+                <b:row><b:column>${msg['reservation.createReservation.BookingDuration']}</b:column><b:column><b:inputText id="czasTrwaniaRezerwacji" value="#{registerReservationPageBean.savedReservationDTO.duration}"/></b:column></b:row>
+
+                <b:commandButton look="success" size="lg" value="${msg['account.registerClient.button.confirm']}" action="#{registerReservationPageBean.createReservationAction()}"/> <!--wykonanie akcji z komponentu CDI po naciśnięciu zapis-->
+                <b:commandButton look="warning" value="${msg['account.registerClient.button.cancel']}" action="cancelAction" immediate="true" /> <!--przycisk powrotu na stronę główną-->
+            </h:form>
+        </b:container>
+    </h:body>
+</html>
+
